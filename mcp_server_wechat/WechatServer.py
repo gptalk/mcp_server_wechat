@@ -7,7 +7,7 @@ from mcp.types import Tool, TextContent, ImageContent, EmbeddedResource, ErrorDa
     BlobResourceContents
 from mcp.shared.exceptions import McpError
 
-from .WechatClient import WeChatClient
+from WechatClient import WeChatClient
 
 
 class WeChatServer:
@@ -172,13 +172,11 @@ class WeChatServer:
                     if not friend or not message:
                         raise ValueError("缺少必要参数: to_user 或 message")
 
-                    delay = arguments.get("delay", 1)
                     search_pages = arguments.get("search_pages", 0)
 
                     result = self.wechat_client.send_message_to_friend(
                         friend=friend,
                         message=message,
-                        delay=delay,
                         search_pages=search_pages
                     )
 
@@ -286,14 +284,8 @@ class WeChatServer:
 if __name__ == "__main__":
     import asyncio
 
-    async def test_send_message():
+    async def start_server():
         server = WeChatServer()
-        # 直接调用 wechat_client 的方法进行测试
-        result = server.wechat_client.send_message_to_friend(
-            friend="文件传输助手",
-            message="MCP_SERVER_WECHAT:你好",
-            search_pages=0
-        )
-        print(result)
+        await server.serve()
 
-    asyncio.run(test_send_message())
+    asyncio.run(start_server())
