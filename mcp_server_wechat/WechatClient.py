@@ -267,7 +267,7 @@ class WeChatClient:
 
         return chat_history_json
 
-    def send_message_to_friend(self, friend: str, message: str, delay: int = 1,
+    def send_message_to_friend(self, friend: str, message: str,
                                search_pages: int = 0):
         """
         向单个好友发送单条消息
@@ -285,14 +285,13 @@ class WeChatClient:
             Messages.send_message_to_friend(
                 friend=friend,
                 message=message,
-                delay=delay,
                 search_pages=search_pages
             )
             return {"status": "success", "message": f"消息已发送给 {friend}"}
         except Exception as e:
             return {"status": "error", "message": f"发送消息失败: {str(e)}"}
 
-    def send_messages_to_friend(self, friend: str, messages: List[str], delay: int = 1,
+    def send_messages_to_friend(self, friend: str, messages: List[str], 
                                 search_pages: int = 0):
         """
         向单个好友发送多条消息
@@ -310,14 +309,13 @@ class WeChatClient:
             Messages.send_messages_to_friend(
                 friend=friend,
                 messages=messages,
-                delay=delay,
                 search_pages=search_pages
             )
             return {"status": "success", "message": f"已向 {friend} 发送 {len(messages)} 条消息"}
         except Exception as e:
             return {"status": "error", "message": f"发送消息失败: {str(e)}"}
 
-    def send_message_to_friends(self, friends: List[str], message: Union[str, List[str]], delay: int = 1):
+    def send_message_to_friends(self, friends: List[str], message: Union[str, List[str]]):
         """
         向多个好友发送消息
 
@@ -332,14 +330,13 @@ class WeChatClient:
         try:
             Messages.send_message_to_friends(
                 friends=friends,
-                message=message,
-                delay=delay
+                message=message
             )
             return {"status": "success", "message": f"已向 {len(friends)} 位好友发送消息"}
         except Exception as e:
             return {"status": "error", "message": f"发送消息失败: {str(e)}"}
 
-    def send_messages_to_friends(self, friends: List[str], messages: List[List[str]], delay: int = 1):
+    def send_messages_to_friends(self, friends: List[str], messages: List[List[str]]):
         """
         向多个好友发送多条消息
 
@@ -354,8 +351,7 @@ class WeChatClient:
         try:
             Messages.send_messages_to_friends(
                 friends=friends,
-                messages=messages,
-                delay=delay
+                messages=messages
             )
             return {"status": "success", "message": f"已向 {len(friends)} 位好友发送消息"}
         except Exception as e:

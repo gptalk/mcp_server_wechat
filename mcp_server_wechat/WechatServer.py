@@ -281,3 +281,19 @@ class WeChatServer:
                 write_stream,
                 server.create_initialization_options(),
             )
+
+
+if __name__ == "__main__":
+    import asyncio
+
+    async def test_send_message():
+        server = WeChatServer()
+        # 直接调用 wechat_client 的方法进行测试
+        result = server.wechat_client.send_message_to_friend(
+            friend="文件传输助手",
+            message="MCP_SERVER_WECHAT:你好",
+            search_pages=0
+        )
+        print(result)
+
+    asyncio.run(test_send_message())
